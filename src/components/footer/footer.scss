@@ -1,0 +1,364 @@
+@use '../../scss/' as *;
+
+.footer {
+    border-top: 1px solid $color-secondary;
+    border-bottom: 1px solid $color-secondary;
+    padding-top: 4rem;
+
+    @include size1200 {
+        padding: 1.5rem 0;
+    }
+
+    .footer__container {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 2rem;
+
+        @include size1200 {
+            display: none;
+        }
+
+        .footer__left {
+            max-width: 22%;
+            width: 100%;
+
+            &__top {
+                display: flex;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+
+            &__content {
+                font-size: 0.875rem;
+                line-height: 1.5rem;
+                color: #3e3e3f;
+
+                p {
+                    margin-bottom: 0.75rem;
+                }
+            }
+
+            .list-social {
+                margin: 24px 0 32px;
+                display: flex;
+                align-items: center;
+
+                li {
+                    margin-right: 25px;
+
+                    img {
+                        height: 30px;
+                        max-width: 30px;
+                    }
+                }
+            }
+
+            .hotline {
+                font-size: 16px;
+                background-color: $color-primary;
+                color: $white;
+                font-weight: 600;
+                text-transform: uppercase;
+                padding: 0.75rem 1.5rem;
+                display: inline-block;
+                border-radius: 1rem 0;
+            }
+        }
+
+        .footer__center {
+            max-width: 45%;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            .title-footer {
+                font-weight: 600;
+                font-size: 1.5rem;
+                line-height: 2rem;
+                margin-bottom: 1.25rem;
+                color: $color-primary;
+            }
+
+            ul li a {
+                font-size: 14px;
+                line-height: 24px;
+                margin-bottom: 16px;
+                color: #57585a;
+            }
+        }
+
+        .footer__right {
+            max-width: 24%;
+            width: 100%;
+
+            .register-form {
+                background-color: $white;
+                border: 6px solid $grey;
+                border-radius: 3.5rem 0;
+                padding: 2rem 1.5rem;
+                margin-bottom: 2rem;
+
+                .title-footer {
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                    line-height: 1.75rem;
+                    color: $color-primary;
+                    margin-bottom: 0.5rem;
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                .form_subscribe {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                input {
+                    border: none;
+                    border-bottom: 1px solid $color-secondary;
+                    font-size: 0.75rem;
+                    line-height: 1.5rem;
+                    padding: 0 0.5rem 0.5rem;
+                    max-width: 6.5rem;
+
+                }
+
+                .btn-submit {
+                    position: relative;
+
+                    button {
+                        background-color: $white;
+                        border-radius: 1rem 0;
+                        border: $border;
+                        padding: 0.75rem 1rem;
+                        font-size: 1rem;
+                        line-height: 1.25rem;
+                        transition: 0.3s;
+                        position: relative;
+                        right: 0;
+                        z-index: 2;
+                        width: max-content;
+                    }
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        right: -0.25rem;
+                        bottom: 0;
+                        width: 98%;
+                        height: 90%;
+                        border-radius: 1rem 0;
+                        border: $border;
+                        transition: 0.3s ease;
+                        z-index: 1;
+                    }
+
+                    &:hover {
+                        button {
+                            background-color: $color-primary;
+                            color: $white;
+                        }
+
+                        &::before {
+                            right: 0;
+                            height: 95%;
+                        }
+                    }
+                }
+            }
+
+            .title-footer {
+                font-weight: 600;
+                font-size: 1.5rem;
+                line-height: 2rem;
+                color: $color-primary;
+                margin-bottom: 1.25rem;
+            }
+
+            img {
+                width: 9.5rem;
+            }
+        }
+
+
+    }
+
+    .footer__container-tablet {
+        @media screen and (min-width:1200px) {
+            display: none;
+        }
+
+        .footer__top {
+            margin-bottom: 0.75rem;
+
+            .title-footer {
+                margin-bottom: 1rem;
+                font-weight: 600;
+                font-size: 1rem;
+            }
+
+            ul {
+                display: flex;
+                gap: 20px;
+
+                img {
+                    max-width: 8rem;
+                }
+            }
+        }
+
+        .footer__center {
+            .title-footer {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+
+                p {
+                    font-weight: 600;
+                }
+            }
+
+            ul {
+                li {
+                    margin-bottom: 1rem;
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        .register-form {
+            margin-bottom: 1.5rem;
+            border-radius: 1.5rem 0;
+            border: 4px solid $grey;
+            padding: 1rem 1.5rem;
+            background-color: $white;
+            margin-bottom: 1.5rem;
+
+            .title-footer {
+                font-size: 1rem;
+                font-weight: 600;
+                line-height: 1.5rem;
+                color: $color-primary;
+                margin-bottom: 0.5rem;
+            }
+
+            .form_subscribe {
+                display: flex;
+                justify-content: space-between;
+
+                input {
+                    border-bottom: $border;
+                    font-size: 1rem;
+                    line-height: 1.5rem;
+                    padding: 0 0.75rem 0.75rem;
+                    flex: 1;
+
+                    @include size420 {
+                        max-width: 15rem;
+                    }
+
+                    @include size320 {
+                        max-width: 8rem;
+                    }
+                }
+
+                .btn-submit {
+                    position: relative;
+
+                    button {
+                        background-color: $white;
+                        border-radius: 0.75rem 0;
+                        border: $border;
+                        padding: 0.5rem 3rem;
+                        font-size: 1rem;
+                        line-height: 1.25rem;
+                        position: relative;
+                        z-index: 2;
+                        transition: 0.3s;
+
+                        @include size420 {
+                            padding: 0.5rem 1rem;
+                        }
+                    }
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        right: -0.25rem;
+                        bottom: 0;
+                        width: 98%;
+                        height: 90%;
+                        border-radius: 0.75rem 0;
+                        border: $border;
+                        transition: 0.3s ease;
+                    }
+
+                    &:hover {
+                        button {
+                            background-color: $color-primary;
+                            color: $white;
+                        }
+
+                        &::before {
+                            right: 0;
+                            height: 95%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer__bottom {
+            .list-social {
+                margin: 1.5rem 0 2rem;
+                display: flex;
+                align-items: center;
+
+                li {
+                    margin-right: 1.25rem;
+
+                    img {
+                        height: 24px;
+                        max-width: 24px;
+                    }
+                }
+            }
+
+            .hotline {
+                font-size: 1rem;
+                background-color: $color-primary;
+                font-weight: 600;
+                text-transform: uppercase;
+                padding: 0.75rem 1.25rem;
+                color: $white;
+                display: inline-block;
+                border-radius: 1rem 0;
+                text-align: center;
+            }
+
+            .logo-bottom {
+                display: flex;
+                gap: 0.5rem;
+                margin: 1.5rem 0;
+            }
+
+            p {
+                font-size: 1rem;
+                line-height: 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+        }
+
+    }
+}
+
+.copy-right {
+    text-align: center;
+    margin: 1.5rem 0;
+    font-size: 1rem;
+
+    @include mobile {
+        margin-bottom: 4rem;
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,63 @@
+@use '../../scss/' as *;
+
+.slide-ads__container {
+    img {
+        border-radius: 3rem 0;
+        margin-bottom: 3rem;
+
+        @include mobile {
+            border-radius: 2rem 0;
+        }
+    }
+
+    /* =============== arrow ============= */
+    .swiper-button-prev:after,
+    .swiper-button-next:after {
+        color: $color-secondary;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        top: unset;
+        bottom: -10px;
+
+        &:hover::after {
+            color: $color-primary;
+        }
+    }
+
+    .swiper-button-prev {
+        left: 6px;
+
+        &:after {
+            content: "\2190";
+        }
+    }
+
+    .swiper-button-next {
+        right: 6px;
+
+        &:after {
+            content: "\2192";
+
+        }
+    }
+
+    .swiper {
+        &::before {
+            content: "";
+            width: 75%;
+            height: 1px;
+            background-color: $color-secondary;
+            position: absolute;
+            z-index: 10;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            @include mobile {
+                width: 60%;
+            }
+        }
+    }
+}

@@ -1,0 +1,93 @@
+@use '../../scss/' as *;
+
+.slide-banner {
+    margin: 1rem 0 2.5rem;
+    position: relative;
+    z-index: 1;
+
+    &::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 50%;
+        height: calc(100% - 1.5rem);
+        border: 1px solid #bcbdc0;
+        border-radius: 5rem 0;
+
+        @include mobile {
+            border-radius: 3rem 0;
+        }
+    }
+
+    .slick-slider {
+        width: calc(100% - 0.75rem);
+        border-radius: 5rem 0;
+        overflow: hidden;
+
+        @include mobile {
+            border-radius: 3rem 0;
+        }
+
+        .img-container {
+            margin-bottom: -0.5rem;
+            padding: 0px;
+        }
+
+        .slick-dots {
+            bottom: 1.25rem;
+
+            li button:before {
+                content: "";
+                width: 0.75rem;
+                height: 0.75rem;
+                background-color: transparent;
+                border-radius: 50%;
+                border: 1px solid #D1D2D4;
+                opacity: 1;
+                transition: 0.3s;
+            }
+
+            li button:hover::before {
+                background-color: #fff;
+            }
+
+            li.slick-active button:before {
+                background-color: #fff;
+            }
+        }
+
+        /* ========== arrow ==========*/
+        .slick-prev {
+            left: 1.25rem;
+            z-index: 10;
+        }
+
+        .slick-next {
+            right: 3rem;
+            z-index: 10;
+        }
+
+        .slick-prev::before {
+            content: "\1f850";
+        }
+
+        .slick-next::before {
+            content: "\1f852";
+        }
+
+        .slick-prev::before,
+        .slick-next::before {
+            color: #bcbdc0;
+            font-size: 3rem;
+        }
+
+        .slick-prev:hover::before,
+        .slick-next:hover::before {
+            color: #221f20;
+        }
+
+        /* ============== end arrow =============== */
+    }
+
+}

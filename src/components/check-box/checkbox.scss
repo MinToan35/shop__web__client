@@ -1,0 +1,37 @@
+@use '../../scss/' as *;
+.custom-checkbox{
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    input{
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+    input~ .checked-size{
+        padding: 0.25rem 1rem;
+        border: $border;
+        border-radius: 0.5rem 0;
+    }
+    input:checked ~ .checked-size{
+        background-color: $color-primary;
+        color: $white;
+        padding: 0.25rem 1rem;
+        border-radius: 0.5rem 0;
+    }
+    input:checked ~ .checked-color{
+        position: relative;
+        &::before {
+            content: "\2713";
+            position: absolute;
+            color: $white;
+            top: 0;
+            left: 50%;
+            font-size: 0.75rem;
+            transform: translateX(-50%);
+        }
+    }
+
+}

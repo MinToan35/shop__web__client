@@ -1,0 +1,134 @@
+@use '../../scss/' as *;
+
+.card {
+    padding: 0 15px;
+
+    @include mobile {
+        padding: 0 8px;
+    }
+    .img-product{
+        .img-hover {
+            display: none;
+        }
+    
+        &:hover {
+            .img-product {
+                display: none;
+            }
+    
+            .img-hover {
+                display: block;
+            }
+        }
+    }
+    
+
+    /* ======== */
+    .card__info {
+
+        &__header {
+            display: flex;
+            justify-content: space-between;
+            margin: 16px 0 12px;
+
+            .colors {
+                position: relative;
+                cursor: pointer;
+
+                &::before {
+                    content: "\2713";
+                    position: absolute;
+                    color: $white;
+                    top: 0;
+                    left: 50%;
+                    font-size: 0.75rem;
+                    transform: translateX(-50%);
+                }
+            }
+
+            .icon {
+                font-size: 1rem;
+                color: $color-secondary;
+            }
+        }
+
+        &__name {
+            font-size: 14px;
+            line-height: 1rem;
+            display: flex;
+            text-align: start;
+            min-height: 2rem;
+        }
+
+        &__footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0.75rem 0;
+            position: relative;
+            h3 {
+                font-size: 1rem;
+                font-weight: 600;
+            }
+
+            .add-to-bag {
+                width: 2rem;
+                height: 2rem;
+                background-color: $color-primary;
+                border-radius: 0.5rem 0;
+                transition: 0.3s ease;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .icon {
+                    color: $white;
+                    font-size: 1rem;
+                }
+
+                @include mobile {
+                    width: 1.5rem;
+                    height: 1.5rem;
+
+                    .icon {
+                        font-size: 0.8rem;
+                    }
+                }
+
+                &:hover {
+                    background-color: $white;
+                    border: 1px solid $color-primary;
+
+                    .icon {
+                        color: $color-primary;
+                    }
+                }
+
+            }
+            .size__items{
+                position: absolute;
+                bottom: 110%;
+                right: 0;
+                width: 5rem;
+                background-color: $white;
+                border: $border;
+                display: none;
+                &.active{
+                    display: block;
+                }
+                li{
+                    
+                    button{
+                        text-transform: uppercase;
+                        width: 100%;
+                        height: 100%;
+                        padding: 0.2rem 0;
+                        transition: 0.3s ease;
+                        &:hover{
+                            background-color: $grey;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
