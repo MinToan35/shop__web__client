@@ -31,16 +31,20 @@ const CategoryPage = ({ products }) => {
   const [filter, setFilter] = useState(initFilter);
   const [isSelect, setIsSelect] = useState(false);
   const [select, setSelect] = useState("Sắp xếp theo");
-  const [listProduct, setListProduct] = useState();
+  const [listProduct, setListProduct] = useState([]);
 
   useEffect(() => {
-    setListProduct(products.filter((item) => item.slugItem === slug));
+    setListProduct(
+      products.filter((item) => (item.slugCatMenu || item.slugItem) === slug)
+    );
   }, [slug, products]);
   const handleFilter = (item) => {
     setSelect(item);
     setIsSelect(false);
     if (item === "Mặc định") {
-      return setListProduct(products.filter((item) => item.slugItem === slug));
+      return setListProduct(
+        products.filter((item) => (item.slugCatMenu || item.slugItem) === slug)
+      );
     } else if (item === "Giá: thấp đến cao") {
       return setListProduct(
         listProduct.sort((a, b) =>
@@ -86,7 +90,9 @@ const CategoryPage = ({ products }) => {
   useEffect(() => {
     const updateProducts = () => {
       handleFilter("Mặc định");
-      let temp = products.filter((item) => item.slugItem === slug);
+      let temp = products.filter(
+        (item) => (item.slugCatMenu || item.slugItem) === slug
+      );
       if (filter.size.length > 0) {
         temp = temp.filter((e) => {
           const check = e.size.find((size) => filter.size.includes(size));

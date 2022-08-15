@@ -1,5 +1,11 @@
 @use '../../scss/' as *;
 
+.nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 nav {
     position: fixed;
     bottom: 0;
@@ -31,10 +37,46 @@ nav {
                 margin-bottom: 0.6rem;
             }
         }
-
         .btn-login {
             display: flex;
             justify-content: center;
         }
+    }
+}
+
+.search{
+    display: none;
+    top:50%;
+    z-index: 120;
+    position: fixed;
+    &.active{
+        display: block;
+    }
+    width: 80vw;
+    &.active{
+        display: block;
+    }
+    input {
+        width: 100%;
+        height: 2.5rem;
+        padding: 1rem 1rem 1rem 2.5rem;
+        font-size: 0.75rem;
+        font-weight: 400;
+        border-radius: 0.25rem;
+        border: $border;
+        color: $color-primary;
+    }
+    button {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 2.5rem;
+        width: 2.5rem;
+        background-color: transparent;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

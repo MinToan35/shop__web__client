@@ -7,7 +7,8 @@ export const getProducts = () => async (dispatch) => {
     const { data } = await axios.get("http://localhost:5000/api/posts");
     dispatch({ type: "GET_PRODUCTS", payload: data });
   } catch (error) {
-    console.log(error.message);
+    dispatch({ type: "LOAD_FAIL", payload: true });
+    console.log("error");
   }
 };
 

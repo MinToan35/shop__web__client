@@ -1,29 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { FiHeadphones } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import "./navbar.scss";
 
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getSearch } from "../../redux/actions/productAction";
+import { setSidebar } from "../../redux/actions/screenAction";
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isSearching, setIsSearching] = useState(false);
+  const { search } = useSelector((state) => state.getProducts);
+  const handlePress = (e) => {
+    if (e.key === "Enter") {
+      navigate(`/timkiem?search=${search}`);
+      dispatch(setSidebar(false));
+      setIsSearching(false);
+    }
+  };
   return (
-    <nav>
-      <div className="navbar container">
-        <button>
-          <BsSearch className="icon" />
-          Tìm kiếm
-        </button>
-        <button>
-          <FaRegUser className="icon" />
-          Đăng nhập
-        </button>
+    <div className="nav">
+      <nav>
+        <div className="navbar container">
+          <button onClick={() => setIsSearching(!isSearching)}>
+            <BsSearch className="icon" />
+            Tìm kiếm
+          </button>
 
-        <button>
-          <FiHeadphones className="icon" />
-          Trợ giúp
-        </button>
+          <button>
+            <FaRegUser className="icon" />
+            Đăng nhập
+          </button>
+
+          <button>
+            <FiHeadphones className="icon" />
+            Trợ giúp
+          </button>
+        </div>
+      </nav>
+      <div className={`search ${isSearching && "active"}`}>
+        <input
+          type="text"
+          placeholder="TÌM KIẾM SẢN PHẨM"
+          onChange={(e) => dispatch(getSearch(e.target.value))}
+          onKeyPress={handlePress}
+        />
+        <Link
+          to={`/timkiem?search=${search}`}
+          onClick={() => {
+            dispatch(getSearch(search));
+            dispatch(setSidebar(false));
+            setIsSearching(false);
+          }}
+        >
+          <button>
+            <BsSearch className="icon-search" />
+          </button>
+        </Link>
       </div>
-    </nav>
+    </div>
   );
 };
 

@@ -2,11 +2,18 @@
 const INITIALSTATE = {
   posts: [],
   search: "",
+  error: false,
+  loading: true,
 };
 const getProductsReducer = (state = INITIALSTATE, action) => {
   switch (action.type) {
     case "GET_PRODUCTS":
-      return action.payload;
+      return { ...state, posts: action.payload.posts, loading: false };
+    case "LOAD_FAIL":
+      return {
+        ...state,
+        error: action.payload,
+      };
     case "GET_LIKE":
       return {
         ...state,

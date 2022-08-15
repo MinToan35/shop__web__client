@@ -5,6 +5,7 @@ import SidebarListItem from "./SidebarListItem";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getSearch } from "../../redux/actions/productAction";
+import { setSidebar } from "../../redux/actions/screenAction";
 
 import { GrClose } from "react-icons/gr";
 import { GoThreeBars } from "react-icons/go";
@@ -16,8 +17,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.getProducts);
   let navigate = useNavigate();
-  const [sidebar, setSidebar] = useState(false);
-
+  //const [sidebar, setSidebar] = useState(false);
+  const { isSideBar } = useSelector((state) => state.screen);
   const { cartItems } = useSelector((state) => state.cardItems);
   const { search } = useSelector((state) => state.getProducts);
   let category;
@@ -35,10 +36,10 @@ const Header = () => {
       {!posts.length ? null : (
         <>
           <header className="header">
-            <div className={`sidebar ${sidebar ? "active" : ""}`}>
+            <div className={`sidebar ${isSideBar ? "active" : ""}`}>
               <button
                 className="btn-close"
-                onClick={() => setSidebar(!sidebar)}
+                onClick={() => dispatch(setSidebar(false))}
               >
                 <GrClose />
               </button>
@@ -72,7 +73,7 @@ const Header = () => {
             <div className="container header__container">
               <GoThreeBars
                 className="icon-bars"
-                onClick={() => setSidebar(!sidebar)}
+                onClick={() => dispatch(setSidebar(true))}
               />
               <ul className="header__left">
                 {category.map((item) => {

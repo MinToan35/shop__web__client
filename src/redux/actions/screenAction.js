@@ -13,3 +13,7 @@ export const setSlide = () => {
   }
   return { type: "SLIDE_TO_SHOW", payload: 5 };
 };
+
+export const setSidebar = (isSidebar) => {
+  return { type: "SET_SIDE_BAR", payload: isSidebar };
+};

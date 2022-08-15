@@ -12,21 +12,32 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "react-toastify/dist/ReactToastify.css";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "./redux/actions/productAction";
+import Loading from "./components/loading/Loading";
+import Error from "./components/error/Error";
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
-
+  const { error } = useSelector((state) => state.getProducts);
+  const { loading } = useSelector((state) => state.getProducts);
   return (
     <BrowserRouter>
-      <Header />
-      <Navbar />
-      <Routes />
-      <Footer />
+      {error ? (
+        <Error />
+      ) : loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header />
+          <Navbar />
+          <Routes />
+          <Footer />
+        </>
+      )}
     </BrowserRouter>
   );
 };
