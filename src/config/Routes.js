@@ -6,9 +6,11 @@ import Category from "../pages/category/Category";
 import Detail from "../pages/detail/Detail";
 import Cart from "../pages/Cart/Cart";
 import Search from "../pages/search/Search";
+import ComingSoon from "../pages/coming-soon/ComingSoon";
 const Routes = () => {
   return (
     <Switch>
+      <Route path="/about/:slug" element={<ComingSoon />} />
       <Route path="/timkiem" element={<Search />} />
       <Route path="/thanhtoan/giohang" element={<Cart />} />
       <Route path="/sanpham/:slug" element={<Detail />} />
