@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setSidebar } from "../../redux/actions/screenAction";
 const ListSubMenuItem = ({ category, products }) => {
+  const dispatch = useDispatch();
   const [showMore, setShowMore] = useState(false);
 
   const item = products.filter((item) => item.categoryItem === category);
@@ -23,7 +26,11 @@ const ListSubMenuItem = ({ category, products }) => {
       <ul>
         {showMore &&
           itemName.map((item, index) => (
-            <Link key={item} to={`/danh-muc/${itemLink[index]}`}>
+            <Link
+              key={item}
+              to={`/danh-muc/${itemLink[index]}`}
+              onClick={() => dispatch(setSidebar(false))}
+            >
               {item}
             </Link>
           ))}

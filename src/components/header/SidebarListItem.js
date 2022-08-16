@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import ListSubMenuItem from "./ListSubMenuItem";
 
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+
+import { useDispatch } from "react-redux";
+import { setSidebar } from "../../redux/actions/screenAction";
 const SidebarListItem = ({ category, itemList, products }) => {
+  const dispatch = useDispatch();
   const [showMore, setShowMore] = useState(false);
 
   //catMenu
@@ -28,7 +32,12 @@ const SidebarListItem = ({ category, itemList, products }) => {
         <ul className="cat-subMenu">
           {catMenu.map((item, index) => (
             <li key={item} className="cat-subMenu__item">
-              <Link to={`/danh-muc/${catMenuLink[index]}`}>{item}</Link>
+              <Link
+                to={`/danh-muc/${catMenuLink[index]}`}
+                onClick={() => dispatch(setSidebar(false))}
+              >
+                {item}
+              </Link>
             </li>
           ))}
         </ul>
