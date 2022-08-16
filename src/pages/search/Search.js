@@ -11,6 +11,7 @@ import { getSearch } from "../../redux/actions/productAction";
 
 import { VscTriangleDown } from "react-icons/vsc";
 import Trending from "../../components/trending/Trending";
+import Loading from "../../components/loading/Loading";
 const Search = () => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.getProducts);
@@ -57,8 +58,10 @@ const SearchPage = ({
   const [isSelect, setIsSelect] = useState(false);
   const [select, setSelect] = useState("Mặc định");
   const [listProduct, setListProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     setListProduct(
       products.filter((item) =>
         removeVietnameseTones(item.title.toLowerCase()).includes(
@@ -66,6 +69,9 @@ const SearchPage = ({
         )
       )
     );
+    setInterval(() => {
+      setLoading(false);
+    }, 1000);
   }, [search, products]);
 
   const handleFilter = (item) => {
@@ -197,51 +203,57 @@ const SearchPage = ({
               Xóa bộ lọc
             </button>
           </div>
-          <div className="category__products">
-            <div className="category__products__top">
-              <h1>{search}</h1>
-              <div className="select-products">
-                <div
-                  className="selected-item "
-                  onClick={() => setIsSelect(!isSelect)}
-                >
-                  <span>{select}</span>
-                  <button>
-                    <VscTriangleDown
-                      className={`icon ${isSelect ? "active" : ""}`}
-                    />
-                  </button>
+          {loading ? (
+            <Loading />
+          ) : (
+            <div className="category__products">
+              <div className="category__products__top">
+                <h1>{search}</h1>
+                <div className="select-products">
+                  <div
+                    className="selected-item "
+                    onClick={() => setIsSelect(!isSelect)}
+                  >
+                    <span>{select}</span>
+                    <button>
+                      <VscTriangleDown
+                        className={`icon ${isSelect ? "active" : ""}`}
+                      />
+                    </button>
+                  </div>
+                  <ul className={`select-items ${isSelect ? "active" : ""}`}>
+                    <li
+                      className="select-item "
+                      onClick={() => handleFilter("Mặc định")}
+                    >
+                      Mặc định
+                    </li>
+                    <li
+                      className="select-item "
+                      onClick={() => handleFilter("Giá: cao đến thấp")}
+                    >
+                      Giá: cao đến thấp
+                    </li>
+                    <li
+                      className="select-item "
+                      onClick={() => handleFilter("Giá: thấp đến cao")}
+                    >
+                      Giá: thấp đến cao
+                    </li>
+                  </ul>
                 </div>
-                <ul className={`select-items ${isSelect ? "active" : ""}`}>
-                  <li
-                    className="select-item "
-                    onClick={() => handleFilter("Mặc định")}
-                  >
-                    Mặc định
-                  </li>
-                  <li
-                    className="select-item "
-                    onClick={() => handleFilter("Giá: cao đến thấp")}
-                  >
-                    Giá: cao đến thấp
-                  </li>
-                  <li
-                    className="select-item "
-                    onClick={() => handleFilter("Giá: thấp đến cao")}
-                  >
-                    Giá: thấp đến cao
-                  </li>
-                </ul>
               </div>
+              <div className="category__products__main">
+                {listProduct &&
+                  listProduct.map((item) => (
+                    <Card key={item._id} item={item} />
+                  ))}
+              </div>
+              {listProduct && listProduct.length === 0 && (
+                <h3>Không có sản phẩm phù hợp</h3>
+              )}
             </div>
-            <div className="category__products__main">
-              {listProduct &&
-                listProduct.map((item) => <Card key={item._id} item={item} />)}
-            </div>
-            {listProduct && listProduct.length === 0 && (
-              <h3>Không có sản phẩm phù hợp</h3>
-            )}
-          </div>
+          )}
         </div>
       </div>
       {productsSeen.length > 1 && (

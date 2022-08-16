@@ -19,10 +19,16 @@ export default Category;
 
 const CategoryPage = ({ products }) => {
   const { slug } = useParams();
-  const title = products.find(
-    (item) => (item.slugCatMenu || item.slugItem) === slug
-  );
-  const { name, catMenu } = title;
+  // const title = products.find(
+  //   (item) => item.slugItem === slug || item.slugCatMenu === slug
+  // );
+  const title = products
+    .map((item) => {
+      if (item.slugItem === slug) return item.name;
+      else if (item.slugCatMenu === slug) return item.catMenu;
+      return "";
+    })
+    .find((item) => item !== "");
   //filter
   const initFilter = {
     color: [],
@@ -30,14 +36,9 @@ const CategoryPage = ({ products }) => {
   };
   const [filter, setFilter] = useState(initFilter);
   const [isSelect, setIsSelect] = useState(false);
-  const [select, setSelect] = useState("Sắp xếp theo");
+  const [select, setSelect] = useState("Mặc định");
   const [listProduct, setListProduct] = useState([]);
 
-  useEffect(() => {
-    setListProduct(
-      products.filter((item) => (item.slugCatMenu || item.slugItem) === slug)
-    );
-  }, [slug, products]);
   const handleFilter = (item) => {
     setSelect(item);
     setIsSelect(false);
@@ -91,7 +92,7 @@ const CategoryPage = ({ products }) => {
     const updateProducts = () => {
       handleFilter("Mặc định");
       let temp = products.filter(
-        (item) => (item.slugCatMenu || item.slugItem) === slug
+        (item) => item.slugItem === slug || item.slugCatMenu === slug
       );
       if (filter.size.length > 0) {
         temp = temp.filter((e) => {
@@ -112,14 +113,14 @@ const CategoryPage = ({ products }) => {
   }, [slug, filter, products]);
 
   return (
-    <Helmet title={catMenu ? catMenu : name}>
+    <Helmet title={title}>
       <div className="category__container">
         <ol className="category__header">
           <li>
             <Link to="/">Trang chủ</Link>
           </li>
           <li>
-            <Link to={`/danh-muc/${slug}`}>{catMenu ? catMenu : name}</Link>
+            <Link to={`/danh-muc/${slug}`}>{title}</Link>
           </li>
         </ol>
         <div className="category__main">
@@ -167,7 +168,7 @@ const CategoryPage = ({ products }) => {
           </div>
           <div className="category__products">
             <div className="category__products__top">
-              <h1>{catMenu ? catMenu : name}</h1>
+              <h1>{title}</h1>
               <div className="select-products">
                 <div
                   className="selected-item "

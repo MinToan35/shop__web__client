@@ -41,7 +41,7 @@ const Navbar = () => {
           </button>
         </div>
       </nav>
-      <div className={`search ${isSearching && "active"}`}>
+      <div className={`search-sidebar ${isSearching && "active"}`}>
         <input
           type="text"
           placeholder="TÌM KIẾM SẢN PHẨM"

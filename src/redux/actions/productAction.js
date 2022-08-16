@@ -1,13 +1,15 @@
-//import * as actionTypes from "../constants/productConstants";
+import * as actionTypes from "../constants/productConstants";
 
 import axios from "axios";
 
 export const getProducts = () => async (dispatch) => {
   try {
-    const { data } = await axios.get("http://localhost:5000/api/posts");
-    dispatch({ type: "GET_PRODUCTS", payload: data });
+    const { data } = await axios.get(
+      "https://shop-web-api-1.herokuapp.com/api/posts"
+    );
+    dispatch({ type: actionTypes.GET_PRODUCTS, payload: data });
   } catch (error) {
-    dispatch({ type: "LOAD_FAIL", payload: true });
+    dispatch({ type: actionTypes.LOAD_FAIL, payload: true });
     console.log("error");
   }
 };
@@ -15,9 +17,9 @@ export const getProducts = () => async (dispatch) => {
 export const getLike = (product) => {
   const newProduct = product;
   newProduct.like = !newProduct.like;
-  return { type: "GET_LIKE", payload: newProduct };
+  return { type: actionTypes.GET_LIKE, payload: newProduct };
 };
 
 export const getSearch = (search) => {
-  return { type: "GET_SEARCH", payload: search };
+  return { type: actionTypes.GET_SEARCH, payload: search };
 };

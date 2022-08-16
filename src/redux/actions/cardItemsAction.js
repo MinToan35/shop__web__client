@@ -1,6 +1,8 @@
+import * as actionTypes from "../constants/cartConstants";
+
 export const addToCart = (product, size, qty) => {
   return {
-    type: "ADD_TO_CART",
+    type: actionTypes.ADD_TO_CART,
     payload: {
       img: product.listImg[0],
       name: product.name,
@@ -16,7 +18,7 @@ export const incQty = (product) => {
   const newProduct = product;
   newProduct.qty += 1;
   return {
-    type: "INC_QTY",
+    type: actionTypes.INC_QTY,
     payload: newProduct,
   };
 };
@@ -26,28 +28,28 @@ export const decQty = (product) => {
   newProduct.qty -= 1;
   if (newProduct.qty === 0) newProduct.qty = 1;
   return {
-    type: "DEC_QTY",
+    type: actionTypes.DEC_QTY,
     payload: newProduct,
   };
 };
 
 export const deleteProduct = (product) => {
   return {
-    type: "DELETE_PRODUCT",
+    type: actionTypes.DELETE_PRODUCT,
     payload: product,
   };
 };
 
 export const deleteCart = () => {
   return {
-    type: "DELETE_CART",
+    type: actionTypes.DELETE_CART,
     payload: [],
   };
 };
 
 export const addProductSeen = (product) => {
   return {
-    type: "ADD_PRODUCT_SEEN",
+    type: actionTypes.ADD_PRODUCT_SEEN,
     payload: product,
   };
 };
