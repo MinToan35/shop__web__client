@@ -46,13 +46,16 @@ nav {
 
 .search-sidebar{
     display: none;
-    top:50%;
-    z-index: 120;
+    top:0%;
+    z-index: 80;
     position: fixed;
+    padding: 2rem;
     &.active{
         display: block;
     }
-    width: 80vw;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
     &.active{
         display: block;
     }
@@ -68,8 +71,8 @@ nav {
     }
     button {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 2rem;
+        left: 2rem;
         height: 2.5rem;
         width: 2.5rem;
         background-color: transparent;
@@ -80,3 +83,4 @@ nav {
         align-items: center;
     }
 }
+
