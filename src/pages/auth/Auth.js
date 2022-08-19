@@ -14,10 +14,11 @@ const Auth = ({ authRoute }) => {
   useEffect(() => {
     loadUser(dispatch);
   }, [dispatch]);
-
   let body;
 
-  if (authState.authLoading) return <Loading />;
+
+  console.log(authState.authLoading)
+  if (authState.authLoading) body = <Loading />;
   else if (authState.isAuthenticated) return <Navigate to="/dashboard" />;
   else {
     body = (
