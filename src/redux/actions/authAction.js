@@ -26,7 +26,7 @@ export const loginUser = (userForm) => async (dispatch) => {
 export const registerUser = (userForm) => async (dispatch) => {
   try {
     const response = await axios.post(
-      `http://localhost:5000/api/auth/register`,
+      `https://shop-web-api-1.herokuapp.com/api/auth/register`,
       userForm
     );
     if (response.data.success)
@@ -54,7 +54,9 @@ export const loadUser = async (dispatch) => {
   if (localStorage["LOCAL_STORAGE_TOKEN_NAME"]) {
     setAuthToken(localStorage["LOCAL_STORAGE_TOKEN_NAME"]);
     try {
-      const response = await axios.get(`http://localhost:5000/api/auth`);
+      const response = await axios.get(
+        `https://shop-web-api-1.herokuapp.com/api/auth`
+      );
       if (response.data.success) {
         dispatch({
           type: "SET_AUTH",
