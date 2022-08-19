@@ -10,6 +10,7 @@ import { logoutUser } from "../../redux/actions/authAction";
 import currencyFormatter from "../../utils/currencyFormatter";
 import { FiLogOut } from "react-icons/fi";
 import Trending from "../../components/trending/Trending";
+import SlideCategory from "../../components/slide-category/SlideCategory";
 import { Link } from "react-router-dom";
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,8 @@ const Dashboard = () => {
 
   const { cartOrder } = useSelector((state) => state.cardItems);
   const { authState } = useSelector((state) => state.auth);
+  const { isTablet } = useSelector((state) => state.screen);
+  const { slideToShow } = useSelector((state) => state.screen);
   const { user } = authState;
   return (
     <Helmet title="Dashboard">
@@ -47,6 +50,7 @@ const Dashboard = () => {
             </div>
           </div>
           <Trending />
+          <SlideCategory slideToShow={slideToShow} isTablet={isTablet} />
         </>
       )}
       <Link to="/">

@@ -31,6 +31,13 @@ const Login = () => {
       const login = await dispatch(loginUser(loginForm));
       if (!login.success) {
         toast.error(login.message);
+        dispatch({
+          type: "SET_AUTH",
+          payload: {
+            isAuthenticated: false,
+            user: null,
+          },
+        });
       }
     } catch (error) {
       console.log(error);
