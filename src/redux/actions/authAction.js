@@ -57,6 +57,14 @@ export const loadUser = async (dispatch) => {
       const response = await axios.get(
         `https://shop-web-api-1.herokuapp.com/api/auth`
       );
+      dispatch({
+        type: "SET_AUTH",
+        payload: {
+          authLoading: true,
+          isAuthenticated: false,
+          user: null,
+        },
+      });
       if (response.data.success) {
         dispatch({
           type: "SET_AUTH",
