@@ -5,7 +5,7 @@ import setAuthToken from "../../utils/setAuthToken";
 export const loginUser = (userForm) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/auth/login",
+      "https://shop-web-api-1.herokuapp.com/api/auth/login",
       userForm
     );
     if (response.data.success) {
