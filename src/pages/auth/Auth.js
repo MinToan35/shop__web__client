@@ -18,7 +18,7 @@ const Auth = ({ authRoute }) => {
 
 
   console.log(authState.authLoading)
-  if (authState.authLoading) body = <Loading />;
+  if (authState.authLoading) return <Loading />;
   else if (authState.isAuthenticated) return <Navigate to="/dashboard" />;
   else {
     body = (
