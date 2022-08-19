@@ -1,0 +1,100 @@
+@use '../../scss/' as *;
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin: 0 auto 4rem;
+    width: 50%;
+    @include mobile{
+        width: 80%;
+    }
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 400;
+        font-weight: 600;
+        margin-top: 2rem;
+    }
+
+    .input-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap:0.5rem;
+        label{
+            float: left;
+        }
+        input {
+            border: 1px solid #000;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+    }
+    .register{
+        display: flex;
+        width: 100%;
+        gap:1rem;
+        justify-content:center;
+        align-items: center;
+        p{
+            font-size: 0.8rem;
+        }
+        .link{
+            color: #2596be;
+            text-decoration:underline;
+            &:hover{
+                text-decoration: none;
+                transform: scale(1.2);
+            }
+        }
+    }
+    .btn{
+        position: relative;
+        .btn-submit {
+            background-color: $color-primary;
+            border: 1px solid $color-primary;
+            padding: 1rem 1.5rem;
+            border-radius: 1.5rem 0;
+            transition: 0.3s;
+            position: relative;
+            font-size: 1rem;
+            color: $white;
+            &:hover {
+                background-color: $grey;
+                color: $color-primary;
+            }
+    
+            @include mobile {
+                border-radius: 1rem 0;
+                font-size: 0.8rem;
+            }
+        }
+        &::before{
+            content: "";
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            height: 88%;
+            border: 1px solid $color-primary ;
+            border-radius: 1.5rem 0;
+            z-index: -1;
+            transform: rotate(3deg);
+            transform-origin: 0% 100%;
+            transition: 0.3s ease;
+            @include mobile{
+                border-radius: 1rem 0;
+            }
+        }
+        &:hover{
+            &::before{
+                transform: rotate(0deg);
+                width: 98%;
+                height: 95%
+            }
+        }
+    }   
+    
+}

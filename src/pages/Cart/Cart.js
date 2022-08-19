@@ -11,6 +11,7 @@ import {
   incQty,
   deleteProduct,
   deleteCart,
+  postCart,
 } from "../../redux/actions/cardItemsAction";
 
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
@@ -18,7 +19,6 @@ import { RiDeleteBinLine } from "react-icons/ri";
 const Cart = () => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cardItems);
-
   const [step, setStep] = useState(0);
 
   const [name, setName] = useState("");
@@ -49,6 +49,18 @@ const Cart = () => {
         toast.success("Đặt hàng thành công");
         setStep(0);
         dispatch(deleteCart());
+        dispatch(
+          postCart(
+            cartItems,
+            name,
+            phoneNumber,
+            city,
+            district,
+            wards,
+            address,
+            code
+          )
+        );
       }
     }
   };

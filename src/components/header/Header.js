@@ -165,7 +165,9 @@ const Header = () => {
                 </div>
 
                 <FiHeadphones className="icon" />
-                <FaRegUser className="icon" />
+                <Link to="/dangnhap">
+                  <FaRegUser className="icon" />
+                </Link>
                 <div className="bag-count">
                   <Link to="/thanhtoan/giohang">
                     <BsHandbag className="icon" />

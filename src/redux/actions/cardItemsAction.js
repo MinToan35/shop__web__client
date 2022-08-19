@@ -1,4 +1,5 @@
 import * as actionTypes from "../constants/cartConstants";
+import axios from "axios";
 
 export const addToCart = (product, size, qty) => {
   return {
@@ -52,4 +53,59 @@ export const addProductSeen = (product) => {
     type: actionTypes.ADD_PRODUCT_SEEN,
     payload: product,
   };
+};
+
+export const postCart =
+  (cartOrder, name, phoneNumber, city, district, wards, address, code) =>
+  async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/api/posts/cart`,
+        {
+          cart: cartOrder,
+          name,
+          phoneNumber,
+          city,
+          district,
+          wards,
+          address,
+          code,
+        }
+      );
+      if (response.data.success) {
+        dispatch({ type: "ADD_CART", payload: response.data.cart });
+        return response.data;
+      }
+    } catch (error) {
+      return error.response.data
+        ? error.response.data
+        : { success: false, message: "Server error" };
+    }
+  };
+
+export const getCart = () => async (dispatch) => {
+  try {
+    const response = await axios.get("http://localhost:5000/api/posts/cart");
+    if (response.data.success) {
+      dispatch({ type: "GET_CART", payload: response.data.cartOrder });
+    }
+  } catch (error) {
+    return error.response.data
+      ? error.response.data
+      : { success: false, message: "Server error" };
+  }
+};
+
+export const deleteCartOrder = (cartId) => async (dispatch) => {
+  try {
+    const response = await axios.delete(
+      `http://localhost:5000/api/posts/cart/${cartId}`
+    );
+    if (response.data.success)
+      dispatch({ type: "DELETE_CART_ORDER", payload: cartId });
+  } catch (error) {
+    return error.response.data
+      ? error.response.data
+      : { success: false, message: "Server error" };
+  }
 };

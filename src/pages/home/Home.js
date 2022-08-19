@@ -12,6 +12,7 @@ import SlideCategory from "../../components/slide-category/SlideCategory";
 import Trending from "../../components/trending/Trending";
 import SlideAds from "../../components/slide-ads/SlideAds";
 import SlideGallery from "../../components/slide-gallery/SlideGallery";
+import setAuthToken from "../../utils/setAuthToken";
 const Home = () => {
   const dispatch = useDispatch();
   const { isTablet } = useSelector((state) => state.screen);
@@ -33,27 +34,31 @@ const Home = () => {
       window.removeEventListener("resize", reLoad);
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    if (localStorage["LOCAL_STORAGE_TOKEN_NAME"]) {
+      setAuthToken(localStorage["LOCAL_STORAGE_TOKEN_NAME"]);
+    }
+  }, []);
   return (
-    <section>
-      <Helmet title="Trang chủ">
-        <div className="home-info">
-          <Link className="info-link" to="/danh-muc/hang-nu-moi-ve">
-            Free Shipping đơn hàng nguyên giá
-          </Link>
-          <Link className="info-link" to="/about/chinh-sach-bao-hanh">
-            Bảo hành trọn đời
-          </Link>
-          <Link className="info-link" to="/about/chinh-sach-the-thanh-vien">
-            Chính sách thẻ thành viên
-          </Link>
-        </div>
-        <SlideBanner isTablet={isTablet} />
-        <SlideCategory slideToShow={slideToShow} isTablet={isTablet} />
-        <Trending />
-        <SlideAds isTablet={isTablet} />
-        <SlideGallery slideToShow={slideToShow} isTablet={isTablet} />
-      </Helmet>
-    </section>
+    <Helmet title="Trang chủ">
+      <div className="home-info">
+        <Link className="info-link" to="/danh-muc/hang-nu-moi-ve">
+          Free Shipping đơn hàng nguyên giá
+        </Link>
+        <Link className="info-link" to="/about/chinh-sach-bao-hanh">
+          Bảo hành trọn đời
+        </Link>
+        <Link className="info-link" to="/about/chinh-sach-the-thanh-vien">
+          Chính sách thẻ thành viên
+        </Link>
+      </div>
+      <SlideBanner isTablet={isTablet} />
+      <SlideCategory slideToShow={slideToShow} isTablet={isTablet} />
+      <Trending />
+      <SlideAds isTablet={isTablet} />
+      <SlideGallery slideToShow={slideToShow} isTablet={isTablet} />
+    </Helmet>
   );
 };
 

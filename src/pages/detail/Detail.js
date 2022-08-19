@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./detail.scss";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/actions/cardItemsAction";
 
@@ -188,7 +188,16 @@ const DetailPage = ({ products, productsSeen, isTablet, slideToShow }) => {
               <button className="add-to-card" onClick={handleAddCart}>
                 Thêm vào giỏ{" "}
               </button>
-              <button className="payment">Mua hàng </button>
+              <Link
+                to="/thanhtoan/giohang"
+                onClick={(e) => {
+                  if (size === "") e.preventDefault();
+                }}
+              >
+                <button className="payment" onClick={handleAddCart}>
+                  Mua hàng{" "}
+                </button>
+              </Link>
             </div>
             <div className="detail__info__main">
               <div className="detail__info__btns">

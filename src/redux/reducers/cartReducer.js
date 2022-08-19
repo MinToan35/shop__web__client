@@ -1,6 +1,8 @@
 const CART_INITIAL_STATE = {
   cartItems: [],
   productsSeen: [],
+  cart: [],
+  cartOrder: [],
 };
 
 const CardItemsReducer = (state = CART_INITIAL_STATE, action) => {
@@ -33,6 +35,23 @@ const CardItemsReducer = (state = CART_INITIAL_STATE, action) => {
           ...state,
           productsSeen: [...state.productsSeen, action.payload],
         };
+    case "ADD_CART":
+      return {
+        ...state,
+        cart: [...state.cart, action.payload],
+      };
+    case "GET_CART":
+      return {
+        ...state,
+        cartOrder: [...action.payload],
+      };
+    case "DELETE_CART_ORDER":
+      return {
+        ...state,
+        cartOrder: state.cartOrder.filter(
+          (cart) => cart._id !== action.payload
+        ),
+      };
     default:
       return state;
   }

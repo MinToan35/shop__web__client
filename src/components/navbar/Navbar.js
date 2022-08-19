@@ -14,6 +14,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isSearching, setIsSearching] = useState(false);
   const { search } = useSelector((state) => state.getProducts);
+  const { authState } = useSelector((state) => state.auth);
   const handlePress = (e) => {
     if (e.key === "Enter") {
       navigate(`/timkiem?search=${search}`);
@@ -30,10 +31,14 @@ const Navbar = () => {
             Tìm kiếm
           </button>
 
-          <button>
+          <Link
+            className="login"
+            to="/dangnhap"
+            onClick={() => dispatch(setSidebar(false))}
+          >
             <FaRegUser className="icon" />
-            Đăng nhập
-          </button>
+            {authState.isAuthenticated ? "Lịch sử" : "Đăng nhập"}
+          </Link>
 
           <button>
             <FiHeadphones className="icon" />

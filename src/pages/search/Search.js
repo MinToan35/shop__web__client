@@ -6,6 +6,7 @@ import Card from "../../components/card/Card";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getSearch } from "../../redux/actions/productAction";
 
@@ -160,6 +161,11 @@ const SearchPage = ({
   return (
     <>
       <div className="category__container">
+        <ol className="category__header">
+          <li>
+            <Link to="/">Trang chủ</Link>
+          </li>
+        </ol>
         <div className="category__main">
           <div className="category__sidebar">
             <ul>
