@@ -32,35 +32,46 @@
 
     }
 
-    /* =============== arrow ============= */
-    .swiper-button-prev:after,
-    .swiper-button-next:after {
-        color: $color-secondary;
-    }
+    /* ========= arrow ======== */
+    .slick-slider {
+        position: relative;
+        z-index: 2;
 
-    .swiper-button-prev,
-    .swiper-button-next {
-        top: 35%;
+        .slick-prev,
+        .slick-next {
+            top: 30%;
 
-        &:hover::after {
-            color: $color-primary;
+            @include mobile {
+                top: 40%;
+            }
+
+            &::before {
+                color: $color-secondary;
+                font-size: 3rem;
+            }
+
+            &:hover::before {
+                color: $color-primary;
+            }
         }
-    }
 
-    .swiper-button-prev {
-        left: 2.5rem;
+        .slick-next {
+            right: 4rem;
+            z-index: 10;
 
-        &:after {
-            content: "\2190";
+            &::before {
+                content: "\1f852";
+            }
+
         }
-    }
 
-    .swiper-button-next {
-        right: 2.5rem;
+        .slick-prev {
+            left: 2.5rem;
+            z-index: 10;
 
-        &:after {
-            content: "\2192";
-
+            &::before {
+                content: "\1f850";
+            }
         }
     }
 

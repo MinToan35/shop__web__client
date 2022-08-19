@@ -60,17 +60,5 @@ h1,h2,h3,h4{
 }
 
 section{
-    padding-top: 5rem;
+    margin-top: 5rem;
 }
-
-input{
-    width: 100%;
-}
-
-@media only screen and (max-width: 480px) {
-    .Toastify__toast-container{
-      width:200px;
-      left:calc(100% - 250px);
-      top:1rem;
-    }
-  }

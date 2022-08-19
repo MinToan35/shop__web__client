@@ -1,11 +1,5 @@
 @use '../../scss/' as *;
 
-.nav{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 nav {
     position: fixed;
     bottom: 0;
@@ -25,16 +19,7 @@ nav {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         text-align: center;
-        .login{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0.8rem;
-            .icon {
-                font-size: 1rem;
-                margin-bottom: 0.6rem;
-            }
-        }
+
         button {
             display: flex;
             flex-direction: column;
@@ -46,50 +31,10 @@ nav {
                 margin-bottom: 0.6rem;
             }
         }
+
         .btn-login {
             display: flex;
             justify-content: center;
         }
     }
 }
-
-.search-sidebar{
-    display: none;
-    top:0%;
-    z-index: 80;
-    position: fixed;
-    padding: 2rem;
-    &.active{
-        display: block;
-    }
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    &.active{
-        display: block;
-    }
-    input {
-        width: 100%;
-        height: 2.5rem;
-        padding: 1rem 1rem 1rem 2.5rem;
-        font-size: 0.75rem;
-        font-weight: 400;
-        border-radius: 0.25rem;
-        border: $border;
-        color: $color-primary;
-    }
-    button {
-        position: absolute;
-        top: 2rem;
-        left: 2rem;
-        height: 2.5rem;
-        width: 2.5rem;
-        background-color: transparent;
-        font-size: 1rem;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
-

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,yBAAyB,CAAA;EACrB,MAAM,EAAE,MAAM;CAOjB;;AARD,AAEI,yBAFqB,CAErB,qBAAqB,CAAA;EACjB,cAAc,EAAE,SAAS;EACzB,UAAU,EAAE,MAAM;EAClB,SAAS,EAAE,IAAI;EACf,aAAa,EAAE,MAAM;CACxB",
+    "sources": [
+        "slide-gallery.scss"
+    ],
+    "names": [],
+    "file": "slide-gallery.css"
+}

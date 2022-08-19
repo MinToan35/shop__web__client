@@ -1,14 +1,21 @@
 import React, { useState } from "react";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
+import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineMinus } from "react-icons/ai";
+
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setSidebar } from "../../redux/actions/screenAction";
-const ListSubMenuItem = ({ category, products }) => {
-  const dispatch = useDispatch();
+
+const ListSubMenuItem = ({ category }) => {
   const [showMore, setShowMore] = useState(false);
 
-  const item = products.filter((item) => item.categoryItem === category);
+  const getProducts = useSelector((state) => state.getProducts);
+  const { products } = getProducts;
+
+  let item;
+  if (products.posts) {
+    item = products.posts.filter((item) => item.categoryItem === category);
+  }
   const itemName = [...new Set(item.map((i) => i.name))];
   const itemLink = [...new Set(item.map((i) => i.slugItem))];
   return (
@@ -26,11 +33,7 @@ const ListSubMenuItem = ({ category, products }) => {
       <ul>
         {showMore &&
           itemName.map((item, index) => (
-            <Link
-              key={item}
-              to={`/danh-muc/${itemLink[index]}`}
-              onClick={() => dispatch(setSidebar(false))}
-            >
+            <Link key={item} to={`/danh-muc/${itemLink[index]}`}>
               {item}
             </Link>
           ))}

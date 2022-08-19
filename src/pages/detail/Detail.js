@@ -1,55 +1,49 @@
 import React, { useState, useEffect } from "react";
 import "./detail.scss";
 import { toast } from "react-toastify";
-import { useParams, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/actions/cardItemsAction";
+
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs, Mousewheel } from "swiper";
 
-import Helmet from "../../components/Helmet";
-import currencyFormatter from "../../utils/currencyFormatter";
-import Trending from "../../components/trending/Trending";
-import Card from "../../components/card/Card";
-
 import { GrPrevious } from "react-icons/gr";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
+
+import Helmet from "../../components/Helmet";
+import currencyFormatter from "../../utils/currencyFormatter";
+import Trending from "../../components/trending/Trending";
+
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/actions/cardItemsAction";
 const Detail = () => {
-  const { posts } = useSelector((state) => state.getProducts);
-  const { productsSeen } = useSelector((state) => state.cardItems);
-  const { isTablet } = useSelector((state) => state.screen);
-  const { slideToShow } = useSelector((state) => state.screen);
-  return (
-    <>
-      {posts && productsSeen && (
-        <DetailPage
-          products={posts}
-          productsSeen={productsSeen}
-          isTablet={isTablet}
-          slideToShow={slideToShow}
-        />
-      )}
-    </>
-  );
-};
-
-export default Detail;
-
-const DetailPage = ({ products, productsSeen, isTablet, slideToShow }) => {
-  const { slug } = useParams();
   const dispatch = useDispatch();
+
+  const { slug } = useParams();
   const [product, setProduct] = useState();
   const [activeThumb, setActiveThumb] = useState(null);
   const [size, setSize] = useState("");
-  const [qty, setQty] = useState(1);
   const [value, setValue] = useState(0);
   const [seemore, setSeemore] = useState(false);
 
+  const [qty, setQty] = useState(1);
+
+  const { products } = useSelector((state) => state.getProducts);
+  const { posts } = products;
   useEffect(() => {
-    setProduct(products.find((item) => item.slugDetail === slug));
-  }, [products, slug]);
+    setProduct(posts ? posts.find((item) => item.slugDetail === slug) : null);
+  }, [slug, posts]);
+
+  const handleAddCart = () => {
+    if (size === "") {
+      toast.error("Vui lòng chọn size");
+    } else {
+      dispatch(addToCart(product, size, qty));
+      toast.success("Đã thêm vào giỏ hàng");
+    }
+  };
 
   const handleQty = (item) => {
     if (item === "increase") setQty(qty + 1);
@@ -59,15 +53,6 @@ const DetailPage = ({ products, productsSeen, isTablet, slideToShow }) => {
         return prevQuantity - 1;
       });
   };
-  const handleAddCart = () => {
-    if (size === "") {
-      toast.error("Vui lòng chọn size");
-    } else {
-      dispatch(addToCart(product, size, qty));
-      toast.success("Đã thêm vào giỏ hàng");
-    }
-  };
-  const productsLike = products.filter((item) => item.like);
   return (
     <Helmet title={`${product ? product.title : ""}`}>
       <div className="detail__container">
@@ -188,16 +173,7 @@ const DetailPage = ({ products, productsSeen, isTablet, slideToShow }) => {
               <button className="add-to-card" onClick={handleAddCart}>
                 Thêm vào giỏ{" "}
               </button>
-              <Link
-                to="/thanhtoan/giohang"
-                onClick={(e) => {
-                  if (size === "") e.preventDefault();
-                }}
-              >
-                <button className="payment" onClick={handleAddCart}>
-                  Mua hàng{" "}
-                </button>
-              </Link>
+              <button className="payment">Mua hàng </button>
             </div>
             <div className="detail__info__main">
               <div className="detail__info__btns">
@@ -249,41 +225,9 @@ const DetailPage = ({ products, productsSeen, isTablet, slideToShow }) => {
           </div>
         )}
       </div>
-      {productsSeen.length > 1 && (
-        <div className="product-seen">
-          <h2>Sản phẩm đã xem</h2>
-          <Swiper
-            slidesPerView={slideToShow}
-            spaceBetween={20}
-            navigation={!isTablet}
-            modules={[Navigation]}
-          >
-            {productsSeen.map((item, index) => (
-              <SwiperSlide key={index}>
-                <Card item={item} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      )}
-      {productsLike.length > 0 && (
-        <div className="product-seen">
-          <h2>Sản phẩm đã thích</h2>
-          <Swiper
-            slidesPerView={slideToShow}
-            spaceBetween={20}
-            navigation={!isTablet}
-            modules={[Navigation]}
-          >
-            {productsLike.map((item, index) => (
-              <SwiperSlide key={index}>
-                <Card item={item} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      )}
       <Trending />
     </Helmet>
   );
 };
+
+export default Detail;

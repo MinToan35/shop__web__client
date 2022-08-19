@@ -1,9 +1,6 @@
-import * as actionTypes from "../constants/cartConstants";
-import axios from "axios";
-
-export const addToCart = (product, size, qty) => {
-  return {
-    type: actionTypes.ADD_TO_CART,
+export const addToCart = (product, size, qty) => (dispatch) => {
+  dispatch({
+    type: "ADD_TO_CART",
     payload: {
       img: product.listImg[0],
       name: product.name,
@@ -12,102 +9,38 @@ export const addToCart = (product, size, qty) => {
       price: product.price,
       qty: qty,
     },
-  };
+  });
 };
 
-export const incQty = (product) => {
+export const incQty = (product) => (dispatch) => {
   const newProduct = product;
   newProduct.qty += 1;
-  return {
-    type: actionTypes.INC_QTY,
+  dispatch({
+    type: "INC_QTY",
     payload: newProduct,
-  };
+  });
 };
 
-export const decQty = (product) => {
+export const decQty = (product) => (dispatch) => {
   const newProduct = product;
   newProduct.qty -= 1;
   if (newProduct.qty === 0) newProduct.qty = 1;
-  return {
-    type: actionTypes.DEC_QTY,
+  dispatch({
+    type: "DEC_QTY",
     payload: newProduct,
-  };
+  });
 };
 
-export const deleteProduct = (product) => {
-  return {
-    type: actionTypes.DELETE_PRODUCT,
+export const deleteProduct = (product) => (dispatch) => {
+  dispatch({
+    type: "DELETE_PRODUCT",
     payload: product,
-  };
+  });
 };
 
-export const deleteCart = () => {
-  return {
-    type: actionTypes.DELETE_CART,
+export const deleteCart = () => (dispatch) => {
+  dispatch({
+    type: "DELETE_CART",
     payload: [],
-  };
-};
-
-export const addProductSeen = (product) => {
-  return {
-    type: actionTypes.ADD_PRODUCT_SEEN,
-    payload: product,
-  };
-};
-
-export const postCart =
-  (cartOrder, name, phoneNumber, city, district, wards, address, code) =>
-  async (dispatch) => {
-    try {
-      const response = await axios.post(
-        `https://shop-web-api-1.herokuapp.com/api/posts/cart`,
-        {
-          cart: cartOrder,
-          name,
-          phoneNumber,
-          city,
-          district,
-          wards,
-          address,
-          code,
-        }
-      );
-      if (response.data.success) {
-        dispatch({ type: "ADD_CART", payload: response.data.cart });
-        return response.data;
-      }
-    } catch (error) {
-      return error.response.data
-        ? error.response.data
-        : { success: false, message: "Server error" };
-    }
-  };
-
-export const getCart = () => async (dispatch) => {
-  try {
-    const response = await axios.get(
-      "https://shop-web-api-1.herokuapp.com/api/posts/cart"
-    );
-    if (response.data.success) {
-      dispatch({ type: "GET_CART", payload: response.data.cartOrder });
-    }
-  } catch (error) {
-    return error.response.data
-      ? error.response.data
-      : { success: false, message: "Server error" };
-  }
-};
-
-export const deleteCartOrder = (cartId) => async (dispatch) => {
-  try {
-    const response = await axios.delete(
-      `https://shop-web-api-1.herokuapp.com/api/posts/cart/${cartId}`
-    );
-    if (response.data.success)
-      dispatch({ type: "DELETE_CART_ORDER", payload: cartId });
-  } catch (error) {
-    return error.response.data
-      ? error.response.data
-      : { success: false, message: "Server error" };
-  }
+  });
 };

@@ -3,32 +3,40 @@ import { Link } from "react-router-dom";
 import "./slide-banner.scss";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import { getBanners, getBannersMobile } from "../../redux/actions/bannerAction";
+import {
+  getBanners as listBanners,
+  getBannersMobile as listBannerMobiles,
+} from "../../redux/actions/bannerAction";
 
 import Slider from "react-slick";
 const SlideBanner = ({ isTablet }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   const dispatch = useDispatch();
-  const { postBanners } = useSelector((state) => state.getBanners);
+  const getBanners = useSelector((state) => state.getBanners);
+  const { postBanners } = getBanners;
 
-  const { postBannerMobiles } = useSelector((state) => state.getBannerMobiles);
+  const getBannerMobiles = useSelector((state) => state.getBannerMobiles);
+  const { postBannerMobiles } = getBannerMobiles;
 
   useEffect(() => {
-    const onMobile = () => {
-      if (window.innerWidth <= 768) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
-    };
+    dispatch(listBanners());
+    dispatch(listBannerMobiles());
+  }, [dispatch]);
 
-    dispatch(getBanners());
-    dispatch(getBannersMobile());
+  //isMobile
+  const onMobile = () => {
+    if (window.innerWidth <= 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+  useEffect(() => {
     onMobile();
     window.addEventListener("resize", onMobile);
     return () => window.removeEventListener("resize", onMobile);
-  }, [dispatch]);
+  }, []);
 
   const settings = {
     dots: !isTablet,
@@ -46,7 +54,7 @@ const SlideBanner = ({ isTablet }) => {
           postBannerMobiles &&
           (isMobile
             ? postBannerMobiles.bannerMobiles.map((item, index) => (
-                <Link to={`/danh-muc/${item.slug}`} key={index}>
+                <Link to="/" key={index}>
                   <div className="img-container">
                     <img
                       className="img-slide"
@@ -58,7 +66,7 @@ const SlideBanner = ({ isTablet }) => {
                 </Link>
               ))
             : postBanners.banners.map((item, index) => (
-                <Link to={`/danh-muc/${item.slug}`} key={index}>
+                <Link to={`/${item.slug}`} key={index}>
                   <div className="img-container">
                     <img
                       className="img-slide"

@@ -1,33 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./cart.scss";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import currencyFormatter from "../../utils/currencyFormatter";
-import Helmet from "../../components/Helmet";
 
+//redux
 import { useSelector, useDispatch } from "react-redux";
 import {
-  decQty,
   incQty,
+  decQty,
   deleteProduct,
   deleteCart,
-  postCart,
 } from "../../redux/actions/cardItemsAction";
+
+import { Link } from "react-router-dom";
+import Helmet from "../../components/Helmet";
+import currencyFormatter from "../../utils/currencyFormatter";
 
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { RiDeleteBinLine } from "react-icons/ri";
 const Cart = () => {
   const dispatch = useDispatch();
-  const { cartItems } = useSelector((state) => state.cardItems);
   const [step, setStep] = useState(0);
 
+  //state
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState();
   const [city, setCity] = useState("");
   const [district, setDistrict] = useState("");
   const [wards, setWards] = useState("");
   const [address, setAddress] = useState("");
+
   const [code, setCode] = useState("");
+
+  const { cartItems } = useSelector((state) => state.cardItems);
 
   const handlePayment = () => {
     if (cartItems.length === 0) toast.error("Không có sản phẩm trong giỏ hàng");
@@ -49,22 +53,9 @@ const Cart = () => {
         toast.success("Đặt hàng thành công");
         setStep(0);
         dispatch(deleteCart());
-        dispatch(
-          postCart(
-            cartItems,
-            name,
-            phoneNumber,
-            city,
-            district,
-            wards,
-            address,
-            code
-          )
-        );
       }
     }
   };
-
   return (
     <section>
       <Helmet title="- Giỏ hàng">
@@ -147,7 +138,6 @@ const Cart = () => {
                     </tbody>
                   </table>
                 )}
-
                 <Link to="/">
                   <button className="btn-home">
                     <span>&larr;</span>Tiếp tục mua hàng
@@ -155,7 +145,6 @@ const Cart = () => {
                 </Link>
               </>
             )}
-
             {step === 1 && (
               <form className="form">
                 <h2>Địa chỉ giao hàng</h2>
@@ -202,8 +191,7 @@ const Cart = () => {
                 {cartItems.reduce((total, item) => total + item.qty, 0)}
               </span>
             </p>
-
-            {code === "sale" && (
+            {code === "SALE" && (
               <p>
                 Tổng tiền hàng{" "}
                 <span>
@@ -220,7 +208,7 @@ const Cart = () => {
               Tiền thanh toán{" "}
               <span>
                 {currencyFormatter.format(
-                  code === "sale"
+                  code === "SALE"
                     ? cartItems.reduce(
                         (total, product) => total + product.price * product.qty,
                         0
@@ -237,7 +225,7 @@ const Cart = () => {
                 <h3>Mã phiếu giảm giá</h3>
                 <input
                   type="text"
-                  placeholder="Enter code: sale"
+                  placeholder="CODE: SALE"
                   onChange={(e) => setCode(e.target.value)}
                 />
               </div>

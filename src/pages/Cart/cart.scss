@@ -38,17 +38,9 @@
                         width: max-content;
                         bottom: -2rem;
                         font-size: 0.8rem;
-                        @include mobile{
-                            display: none;
-                        }
                     }
                     &.active{
                         background-color: $color-primary;
-                        &::after{
-                            @include mobile{
-                                display: block;
-                            }
-                        }
                     }
                     &:nth-child(2){
                         left: 50%;
@@ -92,7 +84,6 @@
         /* =========================== */
         h1{
             font-size: 1.5rem;
-            margin-top: 1rem;
             span{
                 color: $color-hover;
             }
