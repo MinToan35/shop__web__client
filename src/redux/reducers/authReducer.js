@@ -2,6 +2,7 @@ const INITIALSTATE = {
   authState: {
     isAuthenticated: false,
     user: null,
+    authLoading: true
   },
 };
 
