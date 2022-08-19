@@ -32,46 +32,35 @@
 
     }
 
-    /* ========= arrow ======== */
-    .slick-slider {
-        position: relative;
-        z-index: 2;
+    /* =============== arrow ============= */
+    .swiper-button-prev:after,
+    .swiper-button-next:after {
+        color: $color-secondary;
+    }
 
-        .slick-prev,
-        .slick-next {
-            top: 30%;
+    .swiper-button-prev,
+    .swiper-button-next {
+        top: 35%;
 
-            @include mobile {
-                top: 40%;
-            }
-
-            &::before {
-                color: $color-secondary;
-                font-size: 3rem;
-            }
-
-            &:hover::before {
-                color: $color-primary;
-            }
+        &:hover::after {
+            color: $color-primary;
         }
+    }
 
-        .slick-next {
-            right: 4rem;
-            z-index: 10;
+    .swiper-button-prev {
+        left: 2.5rem;
 
-            &::before {
-                content: "\1f852";
-            }
-
+        &:after {
+            content: "\2190";
         }
+    }
 
-        .slick-prev {
-            left: 2.5rem;
-            z-index: 10;
+    .swiper-button-next {
+        right: 2.5rem;
 
-            &::before {
-                content: "\1f850";
-            }
+        &:after {
+            content: "\2192";
+
         }
     }
 

@@ -6,6 +6,7 @@ import Color from "../Color";
 import currencyFormatter from "../../utils/currencyFormatter";
 
 import { useDispatch } from "react-redux";
+import { addProductSeen } from "../../redux/actions/cardItemsAction";
 import { toast } from "react-toastify";
 
 import { FiHeart } from "react-icons/fi";
@@ -13,6 +14,7 @@ import { FaHeart } from "react-icons/fa";
 import { BsHandbag } from "react-icons/bs";
 
 import { addToCart } from "../../redux/actions/cardItemsAction";
+import { getLike } from "../../redux/actions/productAction";
 const Card = ({ item }) => {
   const dispatch = useDispatch();
   const [chooseSize, setChooseSize] = useState(false);
@@ -22,9 +24,17 @@ const Card = ({ item }) => {
     setChooseSize(!chooseSize);
     toast.success("Đã thêm vào giỏ hàng");
   };
+
   return (
     <div className="card">
-      <Link to={`/sanpham/${item.slugDetail}`} className="img-product">
+      <Link
+        to={`/sanpham/${item.slugDetail}`}
+        className="img-product"
+        onClick={() => {
+          dispatch(addProductSeen(item));
+          window.scrollTo(0, 0);
+        }}
+      >
         <img className="img-product" src={item.listImg[0]} alt={item.title} />
         <img className="img-hover" src={item.listImg[1]} alt={item.title} />
       </Link>
@@ -33,8 +43,8 @@ const Card = ({ item }) => {
           <div className="colors">
             <Color color={item.color} />
           </div>
-          <button>
-            {item.like === "like" ? (
+          <button onClick={() => dispatch(getLike(item))}>
+            {item.like ? (
               <FaHeart className="icon" />
             ) : (
               <FiHeart className="icon" />
@@ -42,7 +52,11 @@ const Card = ({ item }) => {
           </button>
         </div>
       </div>
-      <Link className="card__info__name" to={`/sanpham/${item.slugDetail}`}>
+      <Link
+        className="card__info__name"
+        to={`/sanpham/${item.slugDetail}`}
+        onClick={() => window.scrollTo(0, 0)}
+      >
         {item.title}
       </Link>
       <div className="card__info__footer">

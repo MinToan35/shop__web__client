@@ -1,16 +1,19 @@
+import * as actionTypes from "../constants/getApiConstants";
 import axios from "axios";
 
 export const getBanners = () => async (dispatch) => {
   try {
-    dispatch({ type: "GET_BANNER_REQUEST" });
-    const { data } = await axios.get("http://localhost:5000/api/posts/banner");
+    dispatch({ type: actionTypes.GET_BANNER_REQUEST });
+    const { data } = await axios.get(
+      "https://shop-web-api-1.herokuapp.com/api/posts/banner"
+    );
     dispatch({
-      type: "GET_BANNER_SUCCESS",
+      type: actionTypes.GET_BANNER_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: "GET_BANNER_FAIL",
+      type: actionTypes.GET_BANNER_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -21,17 +24,17 @@ export const getBanners = () => async (dispatch) => {
 
 export const getBannersMobile = () => async (dispatch) => {
   try {
-    dispatch({ type: "GET_BANNER_MOBILE_REQUEST" });
+    dispatch({ type: actionTypes.GET_BANNER_MOBILE_REQUEST });
     const { data } = await axios.get(
-      "http://localhost:5000/api/posts/bannerMobile"
+      "https://shop-web-api-1.herokuapp.com/api/posts/bannerMobile"
     );
     dispatch({
-      type: "GET_BANNER_MOBILE_SUCCESS",
+      type: actionTypes.GET_BANNER_MOBILE_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: "GET_BANNER_MOBILE_FAIL",
+      type: actionTypes.GET_BANNER_MOBILE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

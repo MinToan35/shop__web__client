@@ -4,19 +4,22 @@ import axios from "axios";
 
 export const getProducts = () => async (dispatch) => {
   try {
-    dispatch({ type: actionTypes.GET_PRODUCTS_REQUEST });
-    const { data } = await axios.get("http://localhost:5000/api/posts");
-    dispatch({
-      type: actionTypes.GET_PRODUCTS_SUCCESS,
-      payload: data,
-    });
+    const { data } = await axios.get(
+      "https://shop-web-api-1.herokuapp.com/api/posts"
+    );
+    dispatch({ type: actionTypes.GET_PRODUCTS, payload: data });
   } catch (error) {
-    dispatch({
-      type: actionTypes.GET_PRODUCTS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
+    dispatch({ type: actionTypes.LOAD_FAIL, payload: true });
+    console.log("error");
   }
+};
+
+export const getLike = (product) => {
+  const newProduct = product;
+  newProduct.like = !newProduct.like;
+  return { type: actionTypes.GET_LIKE, payload: newProduct };
+};
+
+export const getSearch = (search) => {
+  return { type: actionTypes.GET_SEARCH, payload: search };
 };

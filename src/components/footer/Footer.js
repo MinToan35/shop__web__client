@@ -26,14 +26,14 @@ const Footer = () => {
             <div className="footer__left__content">
               <div className="footer__left__content__info">
                 <p>
-                  Công ty Cổ phần Dự Kim với số đăng ký kinh doanh: 0105777650
+                  Công ty Cổ phần Dự Kim với số đăng ký kinh doanh: 0123456789
                 </p>
                 <p>
                   <strong>Địa chỉ đăng ký: </strong>Tổ dân phố Tháp, P.Đại Mỗ,
                   Q.Nam Từ Liêm, TP.Hà Nội, Việt Nam
                 </p>
                 <p>
-                  <strong>Số điện thoại: </strong>0243 205 2222
+                  <strong>Số điện thoại: </strong>0123 456 789
                 </p>
               </div>
             </div>
@@ -53,7 +53,7 @@ const Footer = () => {
               })}
             </ul>
             <div className="hotline">
-              <a href="tel:02466623434">Hotline: 0246 662 3434</a>
+              <a href="tel:02466623434">Hotline: 0123 456 789</a>
             </div>
           </div>
           <div className="footer__center">

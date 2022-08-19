@@ -1,27 +1,34 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import "./category.scss";
-import FetchData from "../../assets/FetchData";
 import { useParams, Link } from "react-router-dom";
+
+import { useSelector } from "react-redux";
 
 import Helmet from "../../components/Helmet";
 import CheckBox from "../../components/check-box/CheckBox";
 import Card from "../../components/card/Card";
 
 import { VscTriangleDown } from "react-icons/vsc";
+
 const Category = () => {
+  const { posts } = useSelector((state) => state.getProducts);
+  return <>{posts.length && <CategoryPage products={posts} />}</>;
+};
+
+export default Category;
+
+const CategoryPage = ({ products }) => {
   const { slug } = useParams();
-  const data = FetchData();
-  console.log(data);
-  const { posts } = data.products;
-  const [listProduct, setListProduct] = useState(null);
-  useEffect(() => {
-    setListProduct(posts);
-  }, [slug, posts]);
-
-  const title = posts
-    ? posts.find((item) => item.slugItem === slug).name
-    : "Danh mục";
-
+  // const title = products.find(
+  //   (item) => item.slugItem === slug || item.slugCatMenu === slug
+  // );
+  const title = products
+    .map((item) => {
+      if (item.slugItem === slug) return item.name;
+      else if (item.slugCatMenu === slug) return item.catMenu;
+      return "";
+    })
+    .find((item) => item !== "");
   //filter
   const initFilter = {
     color: [],
@@ -29,14 +36,15 @@ const Category = () => {
   };
   const [filter, setFilter] = useState(initFilter);
   const [isSelect, setIsSelect] = useState(false);
-  const [select, setSelect] = useState("Sắp xếp theo");
+  const [select, setSelect] = useState("Mặc định");
+  const [listProduct, setListProduct] = useState([]);
 
   const handleFilter = (item) => {
     setSelect(item);
     setIsSelect(false);
     if (item === "Mặc định") {
       return setListProduct(
-        posts ? posts.filter((item) => item.slugItem === slug) : null
+        products.filter((item) => (item.slugCatMenu || item.slugItem) === slug)
       );
     } else if (item === "Giá: thấp đến cao") {
       return setListProduct(
@@ -78,30 +86,31 @@ const Category = () => {
       }
     }
   };
-
   const clearFilter = () => setFilter(initFilter);
 
-  const updateProducts = useCallback(() => {
-    handleFilter("Mặc định");
-    let temp = posts ? posts.filter((item) => item.slugItem === slug) : null;
-    if (filter.size.length > 0) {
-      temp = temp.filter((e) => {
-        const check = e.size.find((size) => filter.size.includes(size));
-        return check !== undefined;
-      });
-    }
-    if (filter.color.length > 0) {
-      temp = temp.filter((e) => {
-        const check = e.color.find((color) => filter.color.includes(color));
-        return check !== undefined;
-      });
-    }
-    setListProduct(temp);
-  }, [filter]);
-
   useEffect(() => {
+    const updateProducts = () => {
+      handleFilter("Mặc định");
+      let temp = products.filter(
+        (item) => item.slugItem === slug || item.slugCatMenu === slug
+      );
+      if (filter.size.length > 0) {
+        temp = temp.filter((e) => {
+          const check = e.size.find((size) => filter.size.includes(size));
+          return check !== undefined;
+        });
+      }
+      if (filter.color.length > 0) {
+        temp = temp.filter((e) => {
+          const check = e.color.find((color) => filter.color.includes(color));
+          return check !== undefined;
+        });
+      }
+      setListProduct(temp);
+    };
     updateProducts();
-  }, [slug, filter]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug, filter, products]);
 
   return (
     <Helmet title={title}>
@@ -134,6 +143,7 @@ const Category = () => {
                   ))}
                 </div>
               </li>
+
               <li className="filter">
                 <h3>Màu sắc</h3>
                 <div className="filter__content">
@@ -206,8 +216,6 @@ const Category = () => {
     </Helmet>
   );
 };
-
-export default Category;
 
 const sizes = ["s", "m", "l", "xl", "xxl"];
 const colors = ["Trắng", "Đen", "Hồng", "Xanh ngọc", "Nâu đỏ"];

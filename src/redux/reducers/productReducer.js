@@ -1,21 +1,27 @@
-import * as actionTypes from "../constants/productConstants";
-
-const getProductsReducer = (state = { products: [] }, action) => {
+//import * as actionTypes from "../constants/productConstants";
+const INITIALSTATE = {
+  posts: [],
+  search: "",
+  error: false,
+  loading: true,
+};
+const getProductsReducer = (state = INITIALSTATE, action) => {
   switch (action.type) {
-    case actionTypes.GET_PRODUCTS_REQUEST:
+    case "GET_PRODUCTS":
+      return { ...state, posts: action.payload.posts, loading: false };
+    case "LOAD_FAIL":
       return {
-        loading: true,
-        products: [],
-      };
-    case actionTypes.GET_PRODUCTS_SUCCESS:
-      return {
-        products: action.payload,
-        loading: false,
-      };
-    case actionTypes.GET_PRODUCTS_FAIL:
-      return {
-        loading: false,
+        ...state,
         error: action.payload,
+      };
+    case "GET_LIKE":
+      return {
+        ...state,
+      };
+    case "GET_SEARCH":
+      return {
+        ...state,
+        search: action.payload,
       };
     default:
       return state;
