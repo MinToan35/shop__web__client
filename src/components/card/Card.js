@@ -30,7 +30,10 @@ const Card = ({ item }) => {
       <Link
         to={`/sanpham/${item.slugDetail}`}
         className="img-product"
-        onClick={() => dispatch(addProductSeen(item))}
+        onClick={() => {
+          dispatch(addProductSeen(item));
+          window.scrollTo(0, 0);
+        }}
       >
         <img className="img-product" src={item.listImg[0]} alt={item.title} />
         <img className="img-hover" src={item.listImg[1]} alt={item.title} />
@@ -49,7 +52,11 @@ const Card = ({ item }) => {
           </button>
         </div>
       </div>
-      <Link className="card__info__name" to={`/sanpham/${item.slugDetail}`}>
+      <Link
+        className="card__info__name"
+        to={`/sanpham/${item.slugDetail}`}
+        onClick={() => window.scrollTo(0, 0)}
+      >
         {item.title}
       </Link>
       <div className="card__info__footer">
