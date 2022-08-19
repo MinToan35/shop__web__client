@@ -20,6 +20,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      dispatch({
+        type: "SET_AUTH",
+        payload: {
+          authLoading: true,
+          isAuthenticated: false,
+          user: null,
+        },
+      });
       const login = await dispatch(loginUser(loginForm));
       if (!login.success) {
         toast.error(login.message);
