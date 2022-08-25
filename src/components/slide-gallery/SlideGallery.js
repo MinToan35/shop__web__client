@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./slide-gallery.scss";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 //redux
@@ -23,9 +24,9 @@ const SlideGallery = ({ slideToShow, isTablet }) => {
         {postGallery &&
           postGallery.gallery.map((item) => (
             <SwiperSlide key={item._id}>
-              <a href={item.slug} target="_blank" rel="noopener noreferrer">
+              <Link to="/about/gallery">
                 <img src={item.img} alt="" />
-              </a>
+              </Link>
             </SwiperSlide>
           ))}
       </Swiper>
