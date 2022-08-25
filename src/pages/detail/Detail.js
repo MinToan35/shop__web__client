@@ -16,6 +16,7 @@ import Card from "../../components/card/Card";
 import { GrPrevious } from "react-icons/gr";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
+import { screenResize, setSlide } from "../../redux/actions/screenAction";
 const Detail = () => {
   const { posts } = useSelector((state) => state.getProducts);
   const { productsSeen } = useSelector((state) => state.cardItems);
@@ -68,6 +69,23 @@ const DetailPage = ({ products, productsSeen, isTablet, slideToShow }) => {
     }
   };
   const productsLike = products.filter((item) => item.like);
+
+  useEffect(() => {
+    const onResize = () => {
+      dispatch(screenResize());
+    };
+    const reLoad = () => {
+      dispatch(setSlide());
+    };
+    onResize();
+    reLoad();
+    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", reLoad);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("resize", reLoad);
+    };
+  }, [dispatch]);
   return (
     <Helmet title={`${product ? product.title : ""}`}>
       <div className="detail__container">

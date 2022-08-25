@@ -17,7 +17,6 @@ const Auth = ({ authRoute }) => {
   }, [dispatch]);
   let body;
 
-  console.log(authState.authLoading);
   if (authState.authLoading)
     return (
       <Helmet title="Loading">

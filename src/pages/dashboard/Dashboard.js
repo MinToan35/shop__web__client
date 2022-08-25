@@ -12,6 +12,7 @@ import { FiLogOut } from "react-icons/fi";
 import Trending from "../../components/trending/Trending";
 import SlideCategory from "../../components/slide-category/SlideCategory";
 import { Link } from "react-router-dom";
+import { screenResize, setSlide } from "../../redux/actions/screenAction";
 const Dashboard = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -23,6 +24,23 @@ const Dashboard = () => {
   const { isTablet } = useSelector((state) => state.screen);
   const { slideToShow } = useSelector((state) => state.screen);
   const { user } = authState;
+
+  useEffect(() => {
+    const onResize = () => {
+      dispatch(screenResize());
+    };
+    const reLoad = () => {
+      dispatch(setSlide());
+    };
+    onResize();
+    reLoad();
+    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", reLoad);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("resize", reLoad);
+    };
+  }, [dispatch]);
   return (
     <Helmet title="Dashboard">
       {cartOrder.length ? (
@@ -92,7 +110,7 @@ const DashboardPage = ({ cartOrder, username }) => {
 
               <div className="order-item__right">
                 <p className="date">
-                  Ngày đặt hàng: {date.getDate()}-{date.getMonth()}-
+                  Ngày đặt hàng: {date.getDate()}-{date.getMonth() + 1}-
                   {date.getFullYear()}
                 </p>
                 <p className="track-detail">Đang xác nhận</p>
