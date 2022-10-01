@@ -13,23 +13,23 @@ export const logo = [
 export const social = [
   {
     img: "https://pubcdn2.ivymoda.com/images/ic_fb.svg",
-    url: "https://shop-web-delta.vercel.app/",
+    url: "https://shop-web-delta.vercel.app",
   },
   {
     img: "https://pubcdn2.ivymoda.com/images/ic_gg.svg",
-    url: "https://shop-web-delta.vercel.app/",
+    url: "https://shop-web-delta.vercel.app",
   },
   {
     img: "https://pubcdn2.ivymoda.com/images/ic_instagram.svg",
-    url: "https://shop-web-delta.vercel.app/",
+    url: "https://shop-web-delta.vercel.app",
   },
   {
     img: "https://pubcdn2.ivymoda.com/images/ic_pinterest.svg",
-    url: "https://shop-web-delta.vercel.app/",
+    url: "https://shop-web-delta.vercel.app",
   },
   {
     img: "https://pubcdn2.ivymoda.com/images/ic_ytb.svg",
-    url: "https://shop-web-delta.vercel.app/",
+    url: "https://shop-web-delta.vercel.app",
   },
 ];
 
