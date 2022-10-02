@@ -3,7 +3,7 @@ const getAdsReducer = (state = {}, action) => {
     case "GET_ADS_REQUEST":
       return {
         loading: true,
-        postAds: {
+        postBanners: {
           success: false,
           banners: [],
         },
