@@ -3,17 +3,13 @@ const getAdsReducer = (state = {}, action) => {
     case "GET_ADS_REQUEST":
       return {
         loading: true,
-        postBanners: {
-          success: false,
-          banners: [],
-        },
       };
     case "GET_ADS_SUCCESS":
       return {
         loading: false,
         postAds: action.payload,
       };
-    case "GET_BANNER_FAIL":
+    case "GET_ADS_FAIL":
       return {
         loading: false,
         error: action.payload,
