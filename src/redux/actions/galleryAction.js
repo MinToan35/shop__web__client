@@ -6,7 +6,7 @@ export const getGallery = () => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.GET_GALLERY_REQUEST });
     const { data } = await axios.get(
-      "https://shop-web-api-1.herokuapp.com/api/posts/gallery"
+      "http://ec2-54-238-94-249.ap-northeast-1.compute.amazonaws.com:5000/api/posts/gallery"
     );
     dispatch({
       type: actionTypes.GET_GALLERY_SUCCESS,

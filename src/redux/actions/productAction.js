@@ -5,7 +5,7 @@ import axios from "axios";
 export const getProducts = () => async (dispatch) => {
   try {
     const { data } = await axios.get(
-      "https://shop-web-api-1.herokuapp.com/api/posts"
+      "http://ec2-54-238-94-249.ap-northeast-1.compute.amazonaws.com:5000/api/posts"
     );
     dispatch({ type: actionTypes.GET_PRODUCTS, payload: data });
   } catch (error) {

@@ -60,7 +60,7 @@ export const postCart =
   async (dispatch) => {
     try {
       const response = await axios.post(
-        `https://shop-web-api-1.herokuapp.com/api/posts/cart`,
+        `http://ec2-54-238-94-249.ap-northeast-1.compute.amazonaws.com:5000/api/posts/cart`,
         {
           cart: cartOrder,
           name,
@@ -86,7 +86,7 @@ export const postCart =
 export const getCart = () => async (dispatch) => {
   try {
     const response = await axios.get(
-      "https://shop-web-api-1.herokuapp.com/api/posts/cart"
+      "http://ec2-54-238-94-249.ap-northeast-1.compute.amazonaws.com:5000/api/posts/cart"
     );
     if (response.data.success) {
       dispatch({ type: "GET_CART", payload: response.data.cartOrder });
@@ -101,7 +101,7 @@ export const getCart = () => async (dispatch) => {
 export const deleteCartOrder = (cartId) => async (dispatch) => {
   try {
     const response = await axios.delete(
-      `https://shop-web-api-1.herokuapp.com/api/posts/cart/${cartId}`
+      `http://ec2-54-238-94-249.ap-northeast-1.compute.amazonaws.com:5000/api/posts/cart/${cartId}`
     );
     if (response.data.success)
       dispatch({ type: "DELETE_CART_ORDER", payload: cartId });
