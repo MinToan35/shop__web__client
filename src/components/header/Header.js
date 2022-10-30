@@ -13,6 +13,7 @@ import { BsSearch } from "react-icons/bs";
 import { FiHeadphones } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa";
 import { BsHandbag } from "react-icons/bs";
+import logo from "../../assets/logo.png";
 const Header = () => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.getProducts);
@@ -141,7 +142,7 @@ const Header = () => {
                 })}
               </ul>
               <Link to="/">
-                <img src="../../assets/logo.png" alt="logo" />
+                <img src={logo} alt="logo" />
               </Link>
               <div className="header__right">
                 <div className="search">
