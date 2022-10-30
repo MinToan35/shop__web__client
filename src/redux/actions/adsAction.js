@@ -5,9 +5,7 @@ import axios from "axios";
 export const getAds = () => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.GET_ADS_REQUEST });
-    const { data } = await axios.get(
-      "http://ec2-54-238-94-249.ap-northeast-1.compute.amazonaws.com:5000/api/posts/ads"
-    );
+    const { data } = await axios.get("https://mintoanshopweb.ml/api/posts/ads");
     dispatch({
       type: actionTypes.GET_ADS_SUCCESS,
       payload: data,

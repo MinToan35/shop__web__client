@@ -4,9 +4,7 @@ import axios from "axios";
 
 export const getProducts = () => async (dispatch) => {
   try {
-    const { data } = await axios.get(
-      "http://ec2-54-238-94-249.ap-northeast-1.compute.amazonaws.com:5000/api/posts"
-    );
+    const { data } = await axios.get("https://mintoanshopweb.ml/api/posts");
     dispatch({ type: actionTypes.GET_PRODUCTS, payload: data });
   } catch (error) {
     dispatch({ type: actionTypes.LOAD_FAIL, payload: true });
