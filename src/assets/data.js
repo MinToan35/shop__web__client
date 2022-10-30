@@ -35,7 +35,7 @@ export const social = [
 
 export const left_center = [
   {
-    title: "Về IVY moda",
+    title: "Về MT shop",
   },
   {
     title: "Tuyển dụng",
