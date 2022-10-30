@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ToastContainer } from "react-toastify";
 const Helmet = (props) => {
-  document.title = "IVYmoda " + props.title;
+  document.title = "MTshop " + props.title;
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
