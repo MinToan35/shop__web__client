@@ -54,11 +54,7 @@ const SlideCat = ({ slideToShow, isTablet, products }) => {
             key={index}
             onClick={() => handleCategory(item, index)}
           >
-            {item === "Nữ"
-              ? "IVY moda"
-              : item === "Nam"
-              ? "IVY men"
-              : "IVY kids"}
+            {item === "Nữ" ? "MT woman" : item === "Nam" ? "MT men" : "MT kids"}
           </button>
         ))}
       </div>

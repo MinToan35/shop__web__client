@@ -222,7 +222,7 @@ const Footer = () => {
               {logo.map((item, index) => {
                 return (
                   <Link to="/" key={index}>
-                    <img src={item.img} alt="" />
+                    <img src={item.img} alt="" className="logo-footer" />
                   </Link>
                 );
               })}

@@ -1,6 +1,6 @@
 export const logo = [
   {
-    img: "https://pubcdn2.ivymoda.com/images/logo-footer.png",
+    img: "../assets/logo.png",
   },
   {
     img: "https://images.dmca.com/Badges/dmca_protected_16_120.png?ID=0cfdeac4-6e7f-4fca-941f-57a0a0962777",
