@@ -34,7 +34,10 @@ const Navbar = () => {
           <Link
             className="login"
             to="/dangnhap"
-            onClick={() => dispatch(setSidebar(false))}
+            onClick={() => {
+              dispatch(setSidebar(false));
+              setIsSearching(false);
+            }}
           >
             <FaRegUser className="icon" />
             {authState.isAuthenticated ? "Lịch sử" : "Đăng nhập"}

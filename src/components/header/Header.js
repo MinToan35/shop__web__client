@@ -141,10 +141,7 @@ const Header = () => {
                 })}
               </ul>
               <Link to="/">
-                <img
-                  src="https://pubcdn2.ivymoda.com/images/logo.png"
-                  alt="logo"
-                />
+                <img src="../../assets/logo.png" alt="logo" />
               </Link>
               <div className="header__right">
                 <div className="search">
