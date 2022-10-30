@@ -19,7 +19,7 @@ const Footer = () => {
             <div className="footer__left__top">
               {logo.map((item, index) => (
                 <Link key={index} to="/">
-                  <img src={item.img} alt="" />
+                  <img src={item.img} alt="" className="logo-footer" />
                 </Link>
               ))}
             </div>
