@@ -1,7 +1,7 @@
 import logoFooter from "./logo.png";
 export const logo = [
   {
-    img: { logoFooter },
+    img: logoFooter,
   },
   {
     img: "https://images.dmca.com/Badges/dmca_protected_16_120.png?ID=0cfdeac4-6e7f-4fca-941f-57a0a0962777",
