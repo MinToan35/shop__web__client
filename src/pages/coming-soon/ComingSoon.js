@@ -5,7 +5,7 @@ const ComingSoon = () => {
   return (
     <Helmet title="Coming soon">
       <img
-        src="https://i.pinimg.com/originals/5c/5d/66/5c5d6684644136c4b1442f1db30af6bf.gif"
+        src="https://i.giphy.com/media/anwzK42TsSAd4Ad76M/giphy.webp"
         alt=""
       />
     </Helmet>
