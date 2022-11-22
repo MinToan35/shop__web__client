@@ -1,13 +1,11 @@
 import * as actionTypes from "../constants/galleryConstants";
-
+import { apiUrl } from "../constants/getApiConstants";
 import axios from "axios";
 
 export const getGallery = () => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.GET_GALLERY_REQUEST });
-    const { data } = await axios.get(
-      "https://mintoanshopweb.ml/api/posts/gallery"
-    );
+    const { data } = await axios.get(`${apiUrl}/posts/gallery`);
     dispatch({
       type: actionTypes.GET_GALLERY_SUCCESS,
       payload: data,

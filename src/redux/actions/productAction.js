@@ -1,10 +1,10 @@
 import * as actionTypes from "../constants/productConstants";
-
+import { apiUrl } from "../constants/getApiConstants";
 import axios from "axios";
 
 export const getProducts = () => async (dispatch) => {
   try {
-    const { data } = await axios.get("https://mintoanshopweb.ml/api/posts");
+    const { data } = await axios.get(`${apiUrl}/posts`);
     dispatch({ type: actionTypes.GET_PRODUCTS, payload: data });
   } catch (error) {
     dispatch({ type: actionTypes.LOAD_FAIL, payload: true });

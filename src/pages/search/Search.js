@@ -141,13 +141,13 @@ const SearchPage = ({
       if (filter.size.length > 0) {
         temp = temp.filter((e) => {
           const check = e.size.find((size) => filter.size.includes(size));
-          return check !== undefined;
+          return check;
         });
       }
       if (filter.color.length > 0) {
         temp = temp.filter((e) => {
           const check = e.color.find((color) => filter.color.includes(color));
-          return check !== undefined;
+          return check;
         });
       }
       setListProduct(temp);
@@ -319,17 +319,15 @@ function removeVietnameseTones(str) {
   str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
   str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
   str = str.replace(/Đ/g, "D");
-  // Some system encode vietnamese combining accent as individual utf-8 characters
-  // Một vài bộ encode coi các dấu mũ, dấu chữ như một kí tự riêng biệt nên thêm hai dòng này
-  str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); // ̀ ́ ̃ ̉ ̣  huyền, sắc, ngã, hỏi, nặng
+
+  str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); // ̀ ́ ̃ ̉ ̣
   str = str.replace(/\u02C6|\u0306|\u031B/g, ""); // ˆ ̆ ̛  Â, Ê, Ă, Ơ, Ư
   // Remove extra spaces
-  // Bỏ các khoảng trắng liền nhau
   str = str.replace(/ + /g, " ");
   str = str.trim();
   // Remove punctuations
-  // Bỏ dấu câu, kí tự đặc biệt
   str = str.replace(
+    // eslint-disable-next-line no-useless-escape
     /!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g,
     " "
   );

@@ -1,11 +1,11 @@
 import axios from "axios";
-import { toast } from "react-toastify";
+import * as actionTypes from "../constants/getApiConstants";
 import setAuthToken from "../../utils/setAuthToken";
 
 export const loginUser = (userForm) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "https://mintoanshopweb.ml/api/auth/login",
+      `${actionTypes.apiUrl}/auth/login`,
       userForm
     );
     if (response.data.success) {
@@ -26,7 +26,7 @@ export const loginUser = (userForm) => async (dispatch) => {
 export const registerUser = (userForm) => async (dispatch) => {
   try {
     const response = await axios.post(
-      `https://mintoanshopweb.ml/api/auth/register`,
+      `${actionTypes.apiUrl}/auth/register`,
       userForm
     );
     if (response.data.success)
@@ -54,7 +54,7 @@ export const loadUser = async (dispatch) => {
   if (localStorage["LOCAL_STORAGE_TOKEN_NAME"]) {
     setAuthToken(localStorage["LOCAL_STORAGE_TOKEN_NAME"]);
     try {
-      const response = await axios.get(`https://mintoanshopweb.ml/api/auth`);
+      const response = await axios.get(`${actionTypes.apiUrl}/auth`);
       if (response.data.success) {
         dispatch({
           type: "SET_AUTH",

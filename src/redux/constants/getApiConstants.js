@@ -1,3 +1,8 @@
+export const apiUrl =
+  process.env.NODE_ENV !== "production"
+    ? "http://localhost:5000/api"
+    : "https://mintoanshopweb.ml/api";
+
 export const GET_ADS_REQUEST = "GET_ADS_REQUEST";
 export const GET_ADS_SUCCESS = "GET_ADS_SUCCESS";
 export const GET_ADS_FAIL = "GET_ADS_FAIL";

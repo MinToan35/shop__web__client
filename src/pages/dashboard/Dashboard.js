@@ -80,7 +80,7 @@ const Dashboard = () => {
   );
 };
 
-const DashboardPage = ({ cartOrder, username }) => {
+const DashboardPage = ({ cartOrder }) => {
   const dispatch = useDispatch();
   const [value, setValue] = useState(0);
 

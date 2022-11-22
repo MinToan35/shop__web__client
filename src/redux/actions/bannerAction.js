@@ -4,9 +4,7 @@ import axios from "axios";
 export const getBanners = () => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.GET_BANNER_REQUEST });
-    const { data } = await axios.get(
-      "https://mintoanshopweb.ml/api/posts/banner"
-    );
+    const { data } = await axios.get(`${actionTypes.apiUrl}/posts/banner`);
     dispatch({
       type: actionTypes.GET_BANNER_SUCCESS,
       payload: data,
@@ -26,7 +24,7 @@ export const getBannersMobile = () => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.GET_BANNER_MOBILE_REQUEST });
     const { data } = await axios.get(
-      "https://mintoanshopweb.ml/api/posts/bannerMobile"
+      `${actionTypes.apiUrl}/posts/bannerMobile`
     );
     dispatch({
       type: actionTypes.GET_BANNER_MOBILE_SUCCESS,

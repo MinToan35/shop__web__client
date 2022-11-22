@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./header.scss";
 import { Link, useNavigate } from "react-router-dom";
 import SidebarListItem from "./SidebarListItem";

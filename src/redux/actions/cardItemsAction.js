@@ -1,4 +1,5 @@
 import * as actionTypes from "../constants/cartConstants";
+import { apiUrl } from "../constants/getApiConstants";
 import axios from "axios";
 
 export const addToCart = (product, size, qty) => {
@@ -59,19 +60,16 @@ export const postCart =
   (cartOrder, name, phoneNumber, city, district, wards, address, code) =>
   async (dispatch) => {
     try {
-      const response = await axios.post(
-        `https://mintoanshopweb.ml/api/posts/cart`,
-        {
-          cart: cartOrder,
-          name,
-          phoneNumber,
-          city,
-          district,
-          wards,
-          address,
-          code,
-        }
-      );
+      const response = await axios.post(`${apiUrl}/posts/cart`, {
+        cart: cartOrder,
+        name,
+        phoneNumber,
+        city,
+        district,
+        wards,
+        address,
+        code,
+      });
       if (response.data.success) {
         dispatch({ type: "ADD_CART", payload: response.data.cart });
         return response.data;
@@ -85,9 +83,7 @@ export const postCart =
 
 export const getCart = () => async (dispatch) => {
   try {
-    const response = await axios.get(
-      "https://mintoanshopweb.ml/api/posts/cart"
-    );
+    const response = await axios.get(`${apiUrl}/posts/cart`);
     if (response.data.success) {
       dispatch({ type: "GET_CART", payload: response.data.cartOrder });
     }
@@ -100,9 +96,7 @@ export const getCart = () => async (dispatch) => {
 
 export const deleteCartOrder = (cartId) => async (dispatch) => {
   try {
-    const response = await axios.delete(
-      `https://mintoanshopweb.ml/api/posts/cart/${cartId}`
-    );
+    const response = await axios.delete(`${apiUrl}/posts/cart/${cartId}`);
     if (response.data.success)
       dispatch({ type: "DELETE_CART_ORDER", payload: cartId });
   } catch (error) {
